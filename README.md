@@ -13,6 +13,20 @@
   brew install font-inconsolata-nerd-font
   brew install macvim 
   ```
+  
+- 安装插件
+
+  ```
+  #在vim中执行
+  :PlugInstall
+  ```
+
+- 额外配置
+
+  .vimrc 197行为启动vim自动打开的目录,当前为 ~/
+
+  
+
 - 快捷键(参考 .vimrc)
 ```
 -   窗口快速选择（按住-后 根据q-w-e等快速选择窗口）
