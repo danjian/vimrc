@@ -38,10 +38,10 @@ nmap bc :Bw<CR>
 nmap bcf :Bw!<CR>
 
 " choosewin shortcuts
-nmap <slient>  -  <Plug>(choosewin)
+nmap - <Plug>(choosewin)
 if has('gui')
-    nmap <slient> == :set fu<CR>
-    nmap <Slient> =- :set nofu<CR>
+    nmap == :set fu<CR>
+    nmap =- :set nofu<CR>
 endif
 
 " ctrlp shortcuts
@@ -194,6 +194,6 @@ endfunction
 " NerdTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() <= 0 && exists("s:std_in") | Startify | set nu | endif
-autocmd VimEnter * NERDTree ~/Web/baidu/wenku/ | wincmd p
+autocmd VimEnter * NERDTree ~/ | wincmd p
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()  | call s:kill_all_floaterm() | quit | endif
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call s:kill_all_floaterm() | quit | endif
