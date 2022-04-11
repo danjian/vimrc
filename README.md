@@ -1,4 +1,16 @@
 ## vimrc  
+
+- 预览图
+
+  终端模式
+
+  <img src="./images/image-20220411182124401.png" alt="image-20220411182124401" style="zoom:100%;" />
+
+gvim/macvim
+
+![image-20220411182358940](./images/image-20220411182358940.png)
+
+
 - 将 .vimrc .vim/ 移动到用户根目录
 
   ```
