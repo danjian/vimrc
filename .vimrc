@@ -51,13 +51,13 @@ noremap ssm :CtrlPMRU<CR>
 noremap ssa :CtrlPMixed<CR>
 
 " floatterm shortcuts
-nnoremap   <silent>   <F1>    :FloatermToggle<CR>
-tnoremap   <silent>   <F1>    <C-\><C-n>:FloatermToggle<CR>
-nnoremap   <silent>   <F2>    :FloatermKill!<CR>
-tnoremap   <silent>   <F2>    <C-\><C-n>:FloatermKill!<CR>
+nnoremap   <silent>   `    :FloatermToggle<CR>
+tnoremap   <silent>   `    <C-\><C-n>:FloatermToggle<CR>
+
+nmap ] :Startify<CR>
 
 " Nerdtree shortcuts
-nnoremap <silent><expr> fc (winnr()==g:NERDTree.GetWinNum() ? ":NERDTreeClose\<CR>" : ":NERDTreeFocus\<CR>")
+nnoremap <silent> fc :NERDTreeToggle<CR>
 nnoremap <silent> ff :NERDTreeFind<CR>
 
 "Basic vars
@@ -70,6 +70,8 @@ let NERDTreeAutoCenterThreshold=1
 let NERDTreeHighlightCursorline=1
 let g:NERDTreeGitStatusUseNerdFonts = 1
 let g:WebDevIconsNerdTreeAfterGlyphPadding =''
+let g:NERDTreeDirArrowExpandable = '⬏'
+let g:NERDTreeDirArrowCollapsible = '⬎'
 let g:airline_theme='owo'
 let g:startify_change_to_dir = 1
 let g:choosewin_label='qwerty'
@@ -88,11 +90,22 @@ if has('gui')
     let g:buffet_right_trunc_icon = "\uf0a9"
 endif
 let g:buffet_show_index=1
-
-
+let g:startify_lists = [{'type':'dir','header':['   MRU '. getcwd()]}]
+let g:airline_skip_empty_sections = 1
+let g:airline#extensions#default#layout = [['a', 'b'], ['x', 'z', 'warning', 'error']]
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_symbols = {}
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.colnr = ' / '
+if has('gui')
+    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline_powerline_fonts = 1
+endif
+let g:airline_section_z = airline#section#create(['linenr','colnr'])
 " Basic settings
 set enc=utf-8
-set guifont=Inconsolata\ Regular\ Nerd\ Font\ Complete\ Mono:h15
+set guifont=Inconsolata\ Regular\ Nerd\ Font\ Complete\ Mono:h17
 set ruler
 set number
 set langmenu=en
@@ -119,10 +132,10 @@ colorscheme monokai
 
 " buffet ui config
 function! g:BuffetSetCustomColors()
-  hi! BuffetCurrentBuffer cterm=NONE ctermbg=74 ctermfg=white guibg=#76CEFF guifg=#000000
-  hi! BuffetBuffer cterm=NONE ctermbg=238 ctermfg=white guibg=#424242 guifg=#000000
-  hi! BuffetActiveBuffer cterm=NONE ctermbg=74 ctermfg=white guibg=#999999 guifg=white
-  hi! BuffetTab cterm=NONE ctermbg=109 ctermfg=234 guibg=#c0c0c0 guifg=#000000
+  hi! BuffetCurrentBuffer cterm=NONE ctermbg=74 ctermfg=white guibg=#787878 guifg=white
+  hi! BuffetBuffer cterm=NONE ctermbg=238 ctermfg=white guibg=#424242 guifg=white
+  hi! BuffetActiveBuffer cterm=NONE ctermbg=74 ctermfg=white guibg=dimgray guifg=white
+  hi! BuffetTab cterm=NONE ctermbg=109 ctermfg=234 guibg=#76CEFF guifg=black
 endfunction
 
 " PHP LSP config
@@ -188,12 +201,12 @@ function! s:kill_all_floaterm() abort
     for bufnr in floaterm#buflist#gather()
       call floaterm#terminal#kill(bufnr)
     endfor
-    return 
+    return
 endfunction
 
 " NerdTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() <= 0 && exists("s:std_in") | Startify | set nu | endif
-autocmd VimEnter * NERDTree ~/ | wincmd p
+autocmd VimEnter * NERDTree ~/Web/baidu/wenku/ | wincmd p
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()  | call s:kill_all_floaterm() | quit | endif
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call s:kill_all_floaterm() | quit | endif
